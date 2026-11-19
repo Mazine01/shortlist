@@ -1,0 +1,55 @@
+/*
+ * Shortlist design tokens.
+ * Idea: a calm, focused board for remote and async roles. Fog and deep navy
+ * keep reading quiet; signal orange marks the single action that matters on a
+ * screen (apply, post, move forward); lavender is the colour of "saved".
+ */
+:root {
+  --paper: 245 246 250;       /* #F5F6FA fog */
+  --surface: 255 255 255;
+  --sunken: 236 238 245;
+  --ink: 16 26 51;            /* #101A33 deep navy */
+  --ink-muted: 88 98 124;
+  --rule: 222 225 235;
+  --rule-strong: 192 197 212;
+  --brand: 240 97 42;         /* #F0612A signal orange */
+  --brand-ink: 255 255 255;
+  --brand-soft: 253 232 222;
+  --navy: 16 26 51;
+  --lavender: 184 181 245;    /* #B8B5F5 */
+  --lavender-soft: 236 235 253;
+  --ok: 22 128 88;
+  --ok-soft: 220 243 233;
+  --warn: 166 104 0;
+  --warn-soft: 252 240 214;
+  --danger: 196 48 48;
+  --danger-soft: 251 230 230;
+  --shadow-panel: 0 1px 2px rgb(16 26 51 / 0.06), 0 18px 40px -18px rgb(16 26 51 / 0.28);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: 11 16 32;
+    --surface: 19 26 46;
+    --sunken: 27 35 58;
+    --ink: 232 236 246;
+    --ink-muted: 150 160 186;
+    --rule: 40 49 76;
+    --rule-strong: 64 75 106;
+    --brand: 255 128 80;
+    --brand-ink: 11 16 32;
+    --brand-soft: 62 34 24;
+    --navy: 232 236 246;
+    --lavender: 170 166 250;
+    --lavender-soft: 38 36 78;
+    --ok: 96 210 160;
+    --ok-soft: 18 52 40;
+    --warn: 240 186 92;
+    --warn-soft: 60 44 16;
+    --danger: 245 120 120;
+    --danger-soft: 64 26 28;
+    --shadow-panel: 0 1px 0 rgb(var(--rule)), 0 18px 40px -14px rgb(0 0 0 / 0.65);
+    color-scheme: dark;
+  }
+}
