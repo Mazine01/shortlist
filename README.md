@@ -35,7 +35,14 @@ Built for the **Auspify Technologies Full Stack Development Internship, Task 5 (
 
 Each job stores a weighted `tsvector` (title A, tags B, description C) in a column with a **GIN index**. Search uses `websearch_to_tsquery` and ranks with `ts_rank_cd`. Tags have their own GIN index for `@>` filters, and `(status, published_at)` has a B-tree index for the default newest-first list.
 
-On the 1,000 seeded jobs, `EXPLAIN ANALYZE` for "soc analyst splunk" gives: **Execution Time: 1.349 ms** (Seq Scan on jobs). An automated test checks that a search over 1,000+ jobs answers in **under 100 ms**, and the API returns the time it took (`meta.tookMs`), which the results page shows.
+Measured with `EXPLAIN ANALYZE` on the 1,000 seeded jobs, searching "soc analyst splunk":
+
+| Plan | Execution time |
+| --- | --- |
+| Planner's choice (sequential scan, ranked, top 20) | 0.30 ms |
+| Forced through `jobs_search_gin` (bitmap index scan) | 0.15 ms |
+
+At 1,000 rows Postgres often reads the whole table because it's that small. The GIN index is what keeps search fast as the table grows into the tens of thousands. An automated test also checks that the API answers in **under 100 ms** over 1,000+ jobs. The API returns its own timing (`meta.tookMs`), and the results page shows it.
 
 ## Stack
 
