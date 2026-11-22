@@ -25,8 +25,6 @@ import { api, ApiError } from './api';
 type QC = ReturnType<typeof useQueryClient>;
 const refresh = (qc: QC, ...keys: string[]) => Promise.all(keys.map((k) => qc.invalidateQueries({ queryKey: [k] })));
 
-// ---------- Auth ----------
-
 export function useMe() {
   return useQuery({
     queryKey: ['me'],
@@ -73,8 +71,6 @@ export function useLogout() {
   });
 }
 
-// ---------- Public ----------
-
 export function useJobs(query: JobSearch) {
   return useQuery({
     queryKey: ['jobs', query],
@@ -94,8 +90,6 @@ export function useJob(id: number) {
 export function useCompany(slug: string) {
   return useQuery({ queryKey: ['company', slug], queryFn: () => api<{ data: Company; jobs: JobCard[] }>(`/api/companies/${slug}`) });
 }
-
-// ---------- Seeker ----------
 
 export function useProfile(enabled = true) {
   return useQuery({
@@ -163,8 +157,6 @@ export function useToggleSave() {
   });
 }
 
-// ---------- Employer ----------
-
 export function useMyCompany(enabled = true) {
   return useQuery({ queryKey: ['my-company'], queryFn: async () => (await api<{ data: (CompanyBrief & { website: string | null; about: string; size: string }) | null }>('/api/employer/company')).data, enabled });
 }
@@ -216,8 +208,6 @@ export function useUpdateApplicant(jobId: number) {
   });
 }
 
-// ---------- Notifications ----------
-
 export function useNotifications(enabled: boolean) {
   return useQuery({
     queryKey: ['notifications'],
@@ -231,8 +221,6 @@ export function useMarkRead() {
   const qc = useQueryClient();
   return useMutation({ mutationFn: (id?: number) => api('/api/notifications/read', { method: 'POST', body: { id } }), onSuccess: () => refresh(qc, 'notifications') });
 }
-
-// ---------- Admin ----------
 
 export function useAdminStats() {
   return useQuery({ queryKey: ['admin', 'stats'], queryFn: async () => (await api<{ data: AdminStats }>('/api/admin/stats')).data });

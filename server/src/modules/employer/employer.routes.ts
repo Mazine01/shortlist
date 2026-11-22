@@ -35,8 +35,6 @@ async function ownJob(res: Response, jobId: number) {
   return row;
 }
 
-// ---------- Company ----------
-
 employerRouter.get('/company', async (_req, res) => {
   const c = await myCompany(res);
   res.json({ data: c && { ...brief(c), website: c.website, about: c.about, size: c.size } });
@@ -51,8 +49,6 @@ employerRouter.put('/company', validate(companySchema), async (_req, res) => {
     : await db.insert(companies).values({ ...values, ownerId: me(res).id }).returning();
   res.json({ data: { ...brief(c), website: c.website, about: c.about, size: c.size } });
 });
-
-// ---------- Jobs ----------
 
 employerRouter.get('/jobs', async (_req, res) => {
   const c = await myCompany(res);
@@ -121,8 +117,6 @@ employerRouter.delete('/jobs/:id', validate(idParams, 'params'), async (_req, re
   await db.delete(jobs).where(eq(jobs.id, row.j.id));
   res.status(204).end();
 });
-
-// ---------- Applicants ----------
 
 employerRouter.get('/jobs/:id/applicants', validate(idParams, 'params'), async (_req, res) => {
   const row = await ownJob(res, res.locals.params.id);

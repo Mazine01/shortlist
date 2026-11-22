@@ -12,6 +12,7 @@ import { CompanyForm, EmployerDashboard, JobEditor } from '../features/employer/
 import { PipelinePage } from '../features/employer/PipelinePage';
 import { AdminPage } from '../features/admin/AdminPage';
 import { AppShell } from './AppShell';
+import { LegalPage } from '../features/legal/LegalPage';
 
 /** Client-side guard for navigation only; the API enforces every role on its own. */
 function Only({ role, children }: { role: Role; children: React.ReactNode }) {
@@ -37,6 +38,9 @@ export function App() {
         <Route path="/companies/:slug" element={<CompanyPage />} />
         <Route path="/login" element={<AuthPage mode="login" />} />
         <Route path="/register" element={<AuthPage mode="register" />} />
+        <Route path="/privacy" element={<LegalPage doc="privacy" />} />
+        <Route path="/terms" element={<LegalPage doc="terms" />} />
+        <Route path="/cookies" element={<LegalPage doc="cookies" />} />
         <Route path="/me/profile" element={<Only role="SEEKER"><ProfilePage /></Only>} />
         <Route path="/me/applications" element={<Only role="SEEKER"><ApplicationsPage /></Only>} />
         <Route path="/me/saved" element={<Only role="SEEKER"><SavedPage /></Only>} />

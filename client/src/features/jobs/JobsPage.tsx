@@ -78,7 +78,6 @@ export function JobsPage() {
               <span className="font-semibold text-ink">{meta.total.toLocaleString()}</span> {meta.total === 1 ? 'job' : 'jobs'}
               {query.tag && <> tagged <span className="font-semibold text-ink">{query.tag}</span></>}
               {query.q ? <>, best matches first</> : <>, newest first</>}
-              {meta.tookMs !== undefined && <span className="ml-2 text-xs">({meta.tookMs} ms)</span>}
             </p>
           )}
           {jobs.isLoading ? (

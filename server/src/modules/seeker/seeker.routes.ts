@@ -34,8 +34,6 @@ export async function sendResume(res: Response, resumeId: number) {
   res.send(r.data);
 }
 
-// ---------- Profile and resume ----------
-
 seekerRouter.get('/profile', async (_req, res) => {
   const [p] = await db.select().from(seekerProfiles).where(eq(seekerProfiles.userId, me(res).id));
   const r = await latestResume(me(res).id);
@@ -78,8 +76,6 @@ seekerRouter.get('/resume', async (_req, res) => {
   if (!r) throw AppError.notFound('Resume');
   await sendResume(res, r.id);
 });
-
-// ---------- Applying ----------
 
 seekerRouter.post('/jobs/:jobId/apply', validate(jobParams, 'params'), validate(applySchema), async (_req, res) => {
   const seekerId = me(res).id;
@@ -125,8 +121,6 @@ seekerRouter.delete('/applications/:id', validate(z.object({ id: z.coerce.number
   await db.delete(applications).where(eq(applications.id, a.id));
   res.status(204).end();
 });
-
-// ---------- Saved jobs ----------
 
 seekerRouter.get('/saved', async (_req, res) => {
   const rows = await jobRows()

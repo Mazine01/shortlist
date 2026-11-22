@@ -3,6 +3,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { Bell, LogOut } from 'lucide-react';
 import { useLogout, useMarkRead, useMe, useNotifications } from '../lib/queries';
 import { ago } from '../components/bits';
+import { SiteFooter } from '../components/SiteFooter';
 
 export function Logo() {
   return (
@@ -34,7 +35,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         : [['/', 'Find jobs'], ...(me ? [['/me/applications', 'Applications'], ['/me/saved', 'Saved'], ['/me/profile', 'Profile']] : [])];
 
   return (
-    <div className="min-h-screen">
+    <div className="flex min-h-screen flex-col">
       <a href="#main" className="sr-only z-50 rounded-control bg-surface px-3 py-2 focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Skip to content</a>
       <header className="sticky top-0 z-30 border-b border-rule bg-paper/95 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-[1200px] items-center gap-3 px-4 sm:px-6">
@@ -63,12 +64,12 @@ export function AppShell({ children }: { children: ReactNode }) {
           {nav.map(([to, label]) => <NavLink key={to} to={to} end className={link}>{label}</NavLink>)}
         </nav>
       </header>
-      <main id="main" className="mx-auto max-w-[1200px] px-4 pb-24 pt-8 sm:px-6">{children}</main>
+      <main id="main" className="mx-auto w-full max-w-[1200px] flex-1 px-4 pb-20 pt-8 sm:px-6">{children}</main>
+      <SiteFooter className="bg-surface" />
     </div>
   );
 }
 
-/** Notification bell with a small panel. Polls every 30 s while the tab is open. */
 function Bell_() {
   const { data } = useNotifications(true);
   const markRead = useMarkRead();

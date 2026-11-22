@@ -12,10 +12,6 @@ import { useApplicants, useEmployerJob, useUpdateApplicant } from '../../lib/que
 const FLOW: AppStatus[] = ['APPLIED', 'REVIEWING', 'INTERVIEW', 'OFFER'];
 const COLUMN_TONE: Record<AppStatus, string> = { APPLIED: 'bg-rule-strong', REVIEWING: 'bg-lavender', INTERVIEW: 'bg-warn', OFFER: 'bg-ok', REJECTED: 'bg-rule' };
 
-/**
- * The hiring board: one column per stage, a card per applicant. Moving a card
- * updates instantly (optimistic) and notifies the candidate.
- */
 export function PipelinePage() {
   const jobId = Number(useParams().id);
   const { data: job } = useEmployerJob(jobId);

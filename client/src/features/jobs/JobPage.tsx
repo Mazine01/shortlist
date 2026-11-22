@@ -7,7 +7,6 @@ import { ApiError } from '../../lib/api';
 import { ago, CompanyMark, Meta, SaveButton, Tag, Verified } from '../../components/bits';
 import { useApply, useJob, useMe, useProfile, useToggleSave } from '../../lib/queries';
 
-/** Renders the plain-text description: blank lines split paragraphs, "- " lines become lists. */
 function Description({ text }: { text: string }) {
   return (
     <div className="flex max-w-prose flex-col gap-4 leading-relaxed">

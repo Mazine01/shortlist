@@ -1,9 +1,4 @@
-/*
- * Shortlist design tokens.
- * Idea: a calm, focused board for remote and async roles. Fog and deep navy
- * keep reading quiet; signal orange marks the single action that matters on a
- * screen (apply, post, move forward); lavender is the colour of "saved".
- */
+/* Shortlist design tokens. Light theme by default; dark values below. */
 :root {
   --paper: 245 246 250;       /* #F5F6FA fog */
   --surface: 255 255 255;
